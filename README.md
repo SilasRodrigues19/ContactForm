@@ -52,7 +52,6 @@
 
 Contact form submission module with attachments option
 
-
 ### Built With
 
 Technologies used in the project.
@@ -88,11 +87,12 @@ Technologies used in the project.
    ```git
    git clone https://github.com/SilasRodrigues19/ContactForm.git
    ```
-2. Access the folder with the following command: 
-    ```git
-    cd C:\xampp\htdocs\ContactForm
-    ```
+2. Access the folder with the following command:
+   ```git
+   cd C:\xampp\htdocs\ContactForm
+   ```
 3. Open the link below to view the app it in your browser.
+
    ```git
    http://localhost/ContactForm
    ```
