@@ -97,6 +97,16 @@ Technologies used in the project.
    http://localhost/ContactForm
    ```
 
+4. Access [`/src/Credentials.php/`](https://github.com/SilasRodrigues19/ContactForm/blob/main/src/Credentials.php) and change `email` and `password`:
+
+```php
+
+  define('HOST', 'smtp.gmail.com');
+  define('EMAIL', 'example@domain.com'); // Your e-mail address
+  define('PASSWORD', 'xxxxxxxxxxxxxx'); // Your secret which can be generated in the following URL -> https://myaccount.google.com/apppasswords
+  define('PORT', 587);
+```
+
 <!-- CONTRIBUTING -->
 
 ## Contributing
