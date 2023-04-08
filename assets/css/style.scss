@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.custom-file-input {
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+    display: none;
+  }
+
+  &::before {
+    content: 'Selecionar arquivo';
+    display: inline-block;
+    background: #5a67d8;
+    border: none;
+    padding: 8px 20px;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 8px;
+  }
+
+  &:hover::before {
+    background: #667eea;
+  }
+
+  &:active::before {
+    background: #434190;
+  }
+}
