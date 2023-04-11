@@ -8,7 +8,10 @@
   <!-- Sweet Alert CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
 </head>
 
 <body class="bg-gray-900 text-white min-h-screen h-full w-full mx-auto p-8">
@@ -19,20 +22,24 @@
   require_once('PHPMailer.php');
   require_once('SMTP.php');
   require_once('Exception.php');
+  require_once('Helpers.php');
 
 
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
 
-  $name = mb_convert_encoding($_POST['name'], 'ISO-8859-1', 'UTF-8');
-  $email = $_POST['email'];
-  $message = mb_convert_encoding($_POST['message'], 'ISO-8859-1', 'UTF-8');
+  $toastMessage = '';
+
+
+  if (isset($_POST['name'])) $name = mb_convert_encoding($_POST['name'], 'ISO-8859-1', 'UTF-8');
+  if (isset($_POST['email'])) $email = $_POST['email'];
+  if (isset($_POST['message'])) $message = mb_convert_encoding($_POST['message'], 'ISO-8859-1', 'UTF-8');
 
 
   if (isset($_POST['submit'])) {
 
     $mail = new PHPMailer(true);
-    
+
     $mail->setLanguage('pt_br', '../language/phpmailer.lang-pt_br.php');
 
     try {
@@ -110,14 +117,14 @@
 
 
       $mail->send();
-      echo '<div class="text-green-800 bg-green-100 text-center h-24 flex items-center justify-center rounded-sm font-bold tracking-widest">Mensagem enviada</div>';
+      displayNotification(true, '');
     } catch (Exception $e) {
-      echo '<div class="text-green-800 bg-red-100 text-center h-24 flex items-center justify-center rounded-sm font-bold tracking-widest">Mensagem não enviada. Erro: {$mail->ErrorInfo}</div>';
+      displayNotification(false, $mail->ErrorInfo);
     }
   }
 
   ?>
-
+  <script src="../assets/js/validations.js"></script>
 </body>
 
 </html>
