@@ -50,7 +50,7 @@ formContact.addEventListener('click', (e) => {
   
   else {
     isFormValid = true; 
-    showNotification('success', 'Envio de e-mail processado');
+    showNotification('', 'Envio de e-mail processado');
   }
 
   if (!isFormValid) {
