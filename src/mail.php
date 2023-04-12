@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
 </head>
@@ -31,9 +30,11 @@
   $toastMessage = '';
 
 
-  if (isset($_POST['name'])) $name = mb_convert_encoding($_POST['name'], 'ISO-8859-1', 'UTF-8');
-  if (isset($_POST['email'])) $email = $_POST['email'];
-  if (isset($_POST['message'])) $message = mb_convert_encoding($_POST['message'], 'ISO-8859-1', 'UTF-8');
+  session_start();
+  
+  if (isset($_POST['name'])) $_SESSION['name'] = mb_convert_encoding($_POST['name'], 'ISO-8859-1', 'UTF-8');
+  if (isset($_POST['email'])) $_SESSION['email'] = $_POST['email'];
+  if (isset($_POST['message'])) $_SESSION['message'] = mb_convert_encoding($_POST['message'], 'ISO-8859-1', 'UTF-8');
 
 
   if (isset($_POST['submit'])) {
@@ -92,13 +93,13 @@
                               <p>Você recebeu uma nova mensagem de contato através do seu website. Abaixo estão os detalhes da mensagem:</p>
 
                               <ul style="list-style: none; padding-left: 0;">
-                                <li><strong>Nome:</strong> ' . $name . '</li>
-                                <li><strong>Email:</strong> ' . $email . '</li>
-                                <li><strong>Mensagem:</strong> ' . $message . '</li>
+                                <li><strong>Nome:</strong>' . $_SESSION['name'] . '</li>
+                                <li><strong>Email:</strong>' . $_SESSION['email'] . '</li>
+                                <li><strong>Mensagem:</strong>' . $_SESSION['message'] . '</li>
                               </ul>
 
-                              <p>Obrigado,</p>
-                              <p>Silas Rodrigues</p>
+                              <p>Atenciosamente.</p>
+                              <p>' . $_SESSION['name'] . '</p>
                             </div>
 
                           </body>
@@ -117,14 +118,14 @@
 
 
       $mail->send();
-      displayNotification(true, '');
+      displayMailNotification(true, '');
     } catch (Exception $e) {
-      displayNotification(false, $mail->ErrorInfo);
+      displayMailNotification(false, $mail->ErrorInfo);
     }
   }
 
   ?>
-  <script src="../assets/js/validations.js"></script>
+  <script src="../assets/js/mail.js"></script>
 </body>
 
 </html>
