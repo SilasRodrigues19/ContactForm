@@ -1,6 +1,6 @@
 <?php
 
-function displayNotification($isSuccess, $errorMsg)
+function displayMailNotification($isSuccess, $errorMsg)
 {
   $toastMessage = $isSuccess ? 'E-mail enviado com sucesso' : ('Falha ao enviar o e-mail. ' . $errorMsg);
   $toastMessageJson = json_encode($toastMessage);
