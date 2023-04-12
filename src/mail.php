@@ -119,6 +119,8 @@
 
       $mail->send();
       displayMailNotification(true, '');
+      session_unset();
+      session_destroy();
     } catch (Exception $e) {
       displayMailNotification(false, $mail->ErrorInfo);
     }
