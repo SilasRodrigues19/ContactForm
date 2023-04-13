@@ -55,7 +55,8 @@
 
       //Recipients
       $mail->setFrom(EMAIL, 'Silas');
-      $mail->addAddress(EMAIL, 'Silas');
+      $mail->addAddress(CC, 'Silas');
+      $mail->addCC(CC);
 
       //var_dump($_FILES['file']); exit;
 
@@ -78,43 +79,36 @@
       $mail->CharSet = 'UTF-8';
       $mail->ContentType = 'text/html; charset=UTF-8';
       $mail->Body    = '
-                        <html lang="pt-br">
-                          <head>
-                            <meta charset="UTF-8">
-                            <title>Nova Mensagem de Contato</title>
-                          </head>
-                          <body style="font-family: Arial, sans-serif; font-size: 16px; color: #333;">
+                        <body style="font-family: Arial, sans-serif; font-size: 16px; color: #333; background: #f7f7f7; padding: 20px;">
+                          <div style="background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);">
+                            <h1 style="color: #333; margin-bottom: 20px; font-size: 24px; font-weight: bold;">Nova Mensagem de Contato</h1>
 
-                            <div style="background-color: #f7f7f7; padding: 20px;">
-                              <h1 style="color: #333; margin-bottom: 20px;">Nova Mensagem de Contato</h1>
+                            <p style="margin-bottom: 16px;">Olá,</p>
 
-                              <p>Olá,</p>
+                            <p style="margin-bottom: 16px;">Você recebeu uma nova mensagem de contato através do seu website. Abaixo estão os detalhes da mensagem:</p>
 
-                              <p>Você recebeu uma nova mensagem de contato através do seu website. Abaixo estão os detalhes da mensagem:</p>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 16px;">
+                              <li style="margin-bottom: 8px;"><strong>Nome:</strong> ' . $_SESSION['name'] . '</li>
+                              <li style="margin-bottom: 8px;"><strong>Email:</strong> ' . $_SESSION['email'] . '</li>
+                              <li style="margin-bottom: 8px;"><strong>Mensagem:</strong> ' . $_SESSION['message'] . '</li>
+                            </ul>
 
-                              <ul style="list-style: none; padding-left: 0;">
-                                <li><strong>Nome:</strong>' . $_SESSION['name'] . '</li>
-                                <li><strong>Email:</strong>' . $_SESSION['email'] . '</li>
-                                <li><strong>Mensagem:</strong>' . $_SESSION['message'] . '</li>
-                              </ul>
-
-                              <p>Atenciosamente.</p>
-                              <p>' . $_SESSION['name'] . '</p>
-                            </div>
-
-                          </body>
+                            <p style="margin-bottom: 16px;">Atenciosamente.</p>
+                            <p style="margin-bottom: 0;">' . $_SESSION['name'] . '</p>
+                          </div>
+                        </body>
                         ';
       $mail->AltBody = "Olá,
 
-                          Obrigado por entrar em contato. Abaixo estão as informações que você nos enviou:
+                        Obrigado por entrar em contato. Abaixo estão as informações que você nos enviou:
 
-                          Nome: {$_POST['name']}
-                          Email: {$_POST['email']}
-                          Mensagem: {$_POST['message']}
+                        Nome: {$_SESSION['name']}
+                        Email: {$_SESSION['email']}
+                        Mensagem: {$_SESSION['message']}
 
-                          Atenciosamente,
-                          Silas Rodrigues
-                          ";
+                        Atenciosamente,
+                        Silas Rodrigues
+                        ";
 
 
       $mail->send();
