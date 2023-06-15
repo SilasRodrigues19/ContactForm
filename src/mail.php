@@ -55,7 +55,7 @@
 
       //Recipients
       $mail->setFrom(EMAIL, 'Silas');
-      $mail->addAddress(CC, 'Silas');
+      $mail->addAddress(EMAIL, 'Silas');
       $mail->addCC(CC);
 
       //var_dump($_FILES['file']); exit;
